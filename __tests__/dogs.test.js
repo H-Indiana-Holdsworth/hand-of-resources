@@ -25,7 +25,7 @@ describe('hand-of-resources routes', () => {
     });
   });
 
-  it.only('gets all dogs', async () => {
+  it('gets all dogs', async () => {
     await insert({ name: 'gus', type: 'energetic' });
     const res = await request(app).get('/api/v1/dogs');
 
