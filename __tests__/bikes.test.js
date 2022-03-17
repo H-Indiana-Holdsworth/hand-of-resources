@@ -23,4 +23,20 @@ describe('hand-of-resources routes', () => {
       type: 'dirt',
     });
   });
+
+  it('get all bikes', async () => {
+    const bikes = [
+      {
+        brand: 'ktm',
+        type: 'dirt',
+      },
+      {
+        brand: 'honda',
+        type: 'street',
+      },
+    ];
+    const res = await request(app).get('/api/v1/bikes');
+
+    expect(res.body).toEqual(bikes);
+  });
 });
