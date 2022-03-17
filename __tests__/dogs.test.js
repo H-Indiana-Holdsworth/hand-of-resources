@@ -67,5 +67,6 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).delete(`/api/v1/dogs/${dog.id}`);
 
     expect(res.body).toEqual(dog);
+    expect(await getById(dog.id)).toBeNull();
   });
 });
