@@ -2,7 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const { insert } = require('../lib/models/Dog');
+const { insert, getById } = require('../lib/models/Dog');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -59,5 +59,13 @@ describe('hand-of-resources routes', () => {
     };
 
     expect(res.body).toEqual(expected);
+    expect(await getById(dog.id)).toEqual(expected);
+  });
+
+  it('deletes a dog', async () => {
+    const dog = await insert({ name: 'gus', type: 'energetic' });
+    const res = await request(app).delete(`/api/v1/dogs/${dog.id}`);
+
+    expect(res.body).toEqual(dog);
   });
 });
