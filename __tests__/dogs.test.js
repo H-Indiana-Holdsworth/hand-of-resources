@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const { insert } = require('../lib/models/Dog');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -22,5 +23,18 @@ describe('hand-of-resources routes', () => {
       name: 'gus',
       type: 'energetic',
     });
+  });
+
+  it.only('gets all dogs', async () => {
+    await insert({ name: 'gus', type: 'energetic' });
+    const res = await request(app).get('/api/v1/dogs');
+
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        name: 'gus',
+        type: 'energetic',
+      },
+    ]);
   });
 });
