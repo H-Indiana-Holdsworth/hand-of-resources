@@ -44,4 +44,20 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(dog);
   });
+
+  it('updates a dog', async () => {
+    const dog = await insert({ name: 'gus', type: 'energetic' });
+    const res = await request(app).patch(`/api/v1/dogs/${dog.id}`).send({
+      name: 'roxy',
+      type: 'lazy',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      name: 'roxy',
+      type: 'lazy',
+    };
+
+    expect(res.body).toEqual(expected);
+  });
 });
