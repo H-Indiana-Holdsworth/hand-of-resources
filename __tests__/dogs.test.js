@@ -37,4 +37,11 @@ describe('hand-of-resources routes', () => {
       },
     ]);
   });
+
+  it('gets dog by id', async () => {
+    const dog = await insert({ name: 'gus', type: 'energetic' });
+    const res = await request(app).get(`/api/v1/dogs/${dog.id}`);
+
+    expect(res.body).toEqual(dog);
+  });
 });
