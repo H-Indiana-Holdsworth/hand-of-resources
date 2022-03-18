@@ -62,4 +62,11 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('deletes a bike', async () => {
+    const bike = await insert({ brand: 'ktm', type: 'dirt' });
+    const res = await request(app).delete(`/api/v1/bikes/${bike.id}`);
+
+    expect(res.body).toEqual(bike);
+  });
 });
