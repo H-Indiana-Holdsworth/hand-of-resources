@@ -41,4 +41,11 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual([bike1, bike2]);
   });
+
+  it('gets a bike by id', async () => {
+    const bike = await insert({ brand: 'ktm', type: 'dirt' });
+    const res = await request(app).get(`/api/v1/bikes/${bike.id}`);
+
+    expect(res.body).toEqual(bike);
+  });
 });
