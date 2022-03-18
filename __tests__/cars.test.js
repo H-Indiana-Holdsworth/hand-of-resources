@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Car = require('../lib/models/Car');
+const { getCarById } = require('../lib/models/Car');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -68,8 +69,9 @@ describe('hand-of-resources routes', () => {
 
   it('deletes a car', async () => {
     const car = await Car.createCar({ brand: 'ford', type: 'suv' });
-    const res = request(app).delete(`/api/v1/${car.id}`);
+    const res = await request(app).delete(`/api/v1/cars/${car.id}`);
 
     expect(res.body).toEqual(car);
+    expect(await getCarById(car.id)).toBeNull();
   });
 });
