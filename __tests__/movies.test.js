@@ -51,4 +51,22 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(movie);
   });
+
+  it('updates a movie', async () => {
+    const movie = await Movie.insert({
+      title: 'tenet',
+      genre: 'action',
+    });
+
+    const res = await request(app)
+      .patch(`/api/v1/movies/${movie.id}`)
+      .send({ title: 'tenet', genre: 'thriller' });
+
+    const expected = {
+      title: 'tenet',
+      genre: 'thriller',
+    };
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
