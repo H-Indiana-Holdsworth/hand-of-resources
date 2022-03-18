@@ -48,4 +48,19 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(bike);
   });
+
+  it('updates a bike', async () => {
+    const bike = await insert({ brand: 'ktm', type: 'dirt' });
+    const res = await request(app)
+      .patch(`/api/v1/bikes/${bike.id}`)
+      .send({ brand: 'ktm', type: 'street' });
+
+    const expected = {
+      id: expect.any(String),
+      brand: 'ktm',
+      type: 'street',
+    };
+
+    expect(res.body).toEqual(expected);
+  });
 });
