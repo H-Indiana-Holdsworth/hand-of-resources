@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Movie = require('../lib/models/Movie');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -25,15 +26,15 @@ describe('hand-of-resources routes', () => {
   });
 
   it('gets all movies', async () => {
-    const movie1 = {
+    const movie1 = await Movie.insert({
       title: 'tenet',
       genre: 'action',
-    };
+    });
 
-    const movie2 = {
+    const movie2 = await Movie.insert({
       title: 'avengers',
       genre: 'action',
-    };
+    });
 
     const res = await request(app).get('/api/v1/movies');
 
