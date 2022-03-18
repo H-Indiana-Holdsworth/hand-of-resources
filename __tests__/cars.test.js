@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Car = require('../lib/models/Car');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -25,15 +26,15 @@ describe('hand-of-resources routes', () => {
   });
 
   it('gets all cars', async () => {
-    const car1 = {
+    const car1 = await Car.createCar({
       brand: 'ford',
       type: 'suv',
-    };
+    });
 
-    const car2 = {
+    const car2 = await Car.createCar({
       brand: 'chevy',
       type: 'sedan',
-    };
+    });
 
     const res = await request(app).get('/api/v1/cars');
 
