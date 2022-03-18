@@ -18,7 +18,7 @@ describe('hand-of-resources routes', () => {
       .send({ title: 'tenet', genre: 'action' });
 
     expect(res.body).toEqual({
-      id: '1',
+      id: expect.any(String),
       title: 'tenet',
       genre: 'action',
     });
