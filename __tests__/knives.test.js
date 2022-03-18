@@ -40,4 +40,11 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual([knife1, knife2]);
   });
+
+  it('gets a knife', async () => {
+    const knife = await Knife.createKnife({ brand: 'gerber', type: 'edc' });
+    const res = await request(app).get(`/api/v1/knives/${knife.id}`);
+
+    expect(res.body).toEqual({ knife });
+  });
 });
