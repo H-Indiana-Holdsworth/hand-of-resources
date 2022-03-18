@@ -2,8 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const { getAll, getById } = require('../lib/models/Dog');
-const { insert } = require('../lib/models/Bike');
+const { getById, insert } = require('../lib/models/Bike');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
