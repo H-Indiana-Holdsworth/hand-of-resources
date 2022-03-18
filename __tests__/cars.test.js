@@ -23,4 +23,20 @@ describe('hand-of-resources routes', () => {
       type: 'suv',
     });
   });
+
+  it('gets all cars', async () => {
+    const car1 = {
+      brand: 'ford',
+      type: 'suv',
+    };
+
+    const car2 = {
+      brand: 'chevy',
+      type: 'sedan',
+    };
+
+    const res = await request(app).get('/api/v1/cars');
+
+    expect(res.body).toEqual([car1, car2]);
+  });
 });
