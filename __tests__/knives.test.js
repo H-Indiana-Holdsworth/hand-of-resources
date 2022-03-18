@@ -55,7 +55,6 @@ describe('hand-of-resources routes', () => {
       .send({ brand: 'gerber', type: 'survival' });
 
     const expected = {
-      id: expect.any(String),
       brand: 'gerber',
       type: 'survival',
     };
