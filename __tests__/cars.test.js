@@ -65,4 +65,11 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('deletes a car', async () => {
+    const car = await Car.createCar({ brand: 'ford', type: 'suv' });
+    const res = request(app).delete(`/api/v1/${car.id}`);
+
+    expect(res.body).toEqual(car);
+  });
 });
