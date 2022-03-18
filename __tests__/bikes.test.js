@@ -2,6 +2,8 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const { getAll } = require('../lib/models/Dog');
+const { insert } = require('../lib/models/Bike');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -25,18 +27,18 @@ describe('hand-of-resources routes', () => {
   });
 
   it('get all bikes', async () => {
-    const bikes = [
-      {
-        brand: 'ktm',
-        type: 'dirt',
-      },
-      {
-        brand: 'honda',
-        type: 'street',
-      },
-    ];
+    const bike1 = await insert({
+      brand: 'ktm',
+      type: 'dirt',
+    });
+
+    const bike2 = await insert({
+      brand: 'honda',
+      type: 'street',
+    });
+
     const res = await request(app).get('/api/v1/bikes');
 
-    expect(res.body).toEqual(bikes);
+    expect(res.body).toEqual([bike1, bike2]);
   });
 });
