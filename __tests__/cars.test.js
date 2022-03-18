@@ -47,4 +47,22 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(car);
   });
+
+  it('updates a car', async () => {
+    const car = await Car.createCar({
+      brand: 'ford',
+      type: 'suv',
+    });
+
+    const res = await request(app)
+      .patch(`/api/v1/cars/${car.id}`)
+      .send({ brand: 'ford', type: 'sedan' });
+
+    const expected = {
+      brand: 'ford',
+      type: 'sedan',
+    };
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
