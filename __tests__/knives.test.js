@@ -47,4 +47,19 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(knife);
   });
+
+  it('updates a knife', async () => {
+    const knife = await Knife.createKnife({ brand: 'gerber', type: 'edc' });
+    const res = await request(app)
+      .patch(`/api/v1/knives/${knife.id}`)
+      .send({ brand: 'gerber', type: 'survival' });
+
+    const expected = {
+      id: expect.any(String),
+      brand: 'gerber',
+      type: 'survival',
+    };
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
