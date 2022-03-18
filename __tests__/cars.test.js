@@ -40,4 +40,11 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual([car1, car2]);
   });
+
+  it('gets a car', async () => {
+    const car = await Car.createCar({ brand: 'ford', type: 'suv' });
+    const res = await request(app).get(`/api/v1/cars/${car.id}`);
+
+    expect(res.body).toEqual(car);
+  });
 });
