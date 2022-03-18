@@ -40,4 +40,15 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual([movie1, movie2]);
   });
+
+  it('gets a movie', async () => {
+    const movie = await Movie.insert({
+      title: 'tenet',
+      genre: 'action',
+    });
+
+    const res = await request(app).get(`/api/v1/movies/${movie.id}`);
+
+    expect(res.body).toEqual(movie);
+  });
 });
