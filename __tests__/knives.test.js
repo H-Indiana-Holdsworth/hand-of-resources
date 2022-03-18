@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Knife = require('../lib/models/Knife');
+const { getKnifeById } = require('../lib/models/Knife');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -67,5 +68,6 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).delete(`/api/v1/knives/${knife.id}`);
 
     expect(res.body).toEqual(knife);
+    expect(await getKnifeById(knife.id)).toBeNull();
   });
 });
