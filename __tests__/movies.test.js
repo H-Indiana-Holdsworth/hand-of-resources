@@ -23,4 +23,20 @@ describe('hand-of-resources routes', () => {
       genre: 'action',
     });
   });
+
+  it('gets all movies', async () => {
+    const movie1 = {
+      title: 'tenet',
+      genre: 'action',
+    };
+
+    const movie2 = {
+      title: 'avengers',
+      genre: 'action',
+    };
+
+    const res = await request(app).get('/api/v1/movies');
+
+    expect(res.body).toEqual([movie1, movie2]);
+  });
 });
