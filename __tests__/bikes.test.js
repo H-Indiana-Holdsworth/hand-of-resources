@@ -2,7 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const { getAll } = require('../lib/models/Dog');
+const { getAll, getById } = require('../lib/models/Dog');
 const { insert } = require('../lib/models/Bike');
 
 describe('hand-of-resources routes', () => {
@@ -68,5 +68,6 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).delete(`/api/v1/bikes/${bike.id}`);
 
     expect(res.body).toEqual(bike);
+    expect(await getById(bike.id)).toBeNull();
   });
 });
