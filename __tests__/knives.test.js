@@ -61,4 +61,11 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
+  it('deletes a knife', async () => {
+    const knife = await Knife.createKnife({ brand: 'gerber', type: 'edc' });
+    const res = await request(app).delete(`/api/v1/knives/${knife.id}`);
+
+    expect(res.body).toEqual(knife);
+  });
 });
