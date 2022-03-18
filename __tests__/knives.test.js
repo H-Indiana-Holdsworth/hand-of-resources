@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Knife = require('../lib/models/Knife');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -22,5 +23,21 @@ describe('hand-of-resources routes', () => {
       brand: 'gerber',
       type: 'edc',
     });
+  });
+
+  it('gets all knives', async () => {
+    const knife1 = await Knife.createKnife({
+      brand: 'gerber',
+      type: 'edc',
+    });
+
+    const knife2 = await Knife.createKnife({
+      brand: 'pro tech',
+      type: 'pocket',
+    });
+
+    const res = await request(app).get('/api/v1/knives');
+
+    expect(res.body).toEqual([knife1, knife2]);
   });
 });
