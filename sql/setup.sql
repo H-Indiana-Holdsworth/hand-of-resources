@@ -1,2 +1,37 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
+DROP TABLE IF EXISTS dogs;
+DROP TABLE IF EXISTS bikes;
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS knives;
+DROP TABLE IF EXISTS cars;
+
+CREATE TABLE dogs (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    type TEXT NOT NULL
+);
+
+CREATE TABLE bikes (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    brand TEXT NOT NULL,
+    type TEXT NOT NULL
+);
+
+CREATE TABLE movies (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title TEXT NOT NULL,
+    genre TEXT NOT NULL
+);
+
+CREATE TABLE knives (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    brand TEXT NOT NULL,
+    type TEXT NOT NULL
+);
+
+CREATE TABLE cars (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    brand TEXT NOT NULL,
+    type TEXT NOT NULL
+);
