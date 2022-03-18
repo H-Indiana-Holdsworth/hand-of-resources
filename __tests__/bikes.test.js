@@ -56,11 +56,10 @@ describe('hand-of-resources routes', () => {
       .send({ brand: 'ktm', type: 'street' });
 
     const expected = {
-      id: expect.any(String),
       brand: 'ktm',
       type: 'street',
     };
 
-    expect(res.body).toEqual(expected);
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
 });
